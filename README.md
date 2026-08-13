@@ -1,9 +1,10 @@
-# App de productos de la despensa 
+# App de productos de la despensa
 
 ## Integrantes
 
-  Claure Collao Sebastian 
-  Moreno Cors Orlando Sebastian  
+* Moreno Cors Orlando Sebastian
+* Claure Collao Sebastian
+
 
 ## Tipo de proyecto
 
