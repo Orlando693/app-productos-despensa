@@ -1,0 +1,169 @@
+<div class="container">
+
+  <header class="top">
+
+    <button class="menu">
+      ☰
+    </button>
+
+    <h1>
+      Shopping List
+    </h1>
+
+  </header>
+
+
+  <section class="add-section">
+
+    <input
+      #inp
+      placeholder="Añadir un nuevo artículo"
+      (keyup.enter)="agregar(inp)"
+    >
+
+
+    <button
+      class="add"
+      (click)="agregar(inp)">
+
+      +
+
+    </button>
+
+  </section>
+
+
+
+  <!-- PRODUCTOS PENDIENTES -->
+
+  <section class="group">
+
+    <div class="title">
+
+      <h2>
+        Por comprar
+      </h2>
+
+      <span>
+        {{ pend().length }} items
+      </span>
+
+    </div>
+
+
+
+    @for (prod of pend(); track prod.id) {
+
+      <div class="product">
+
+
+        <button
+          class="check"
+          (click)="cambiar(prod.id)">
+
+          ☐
+
+        </button>
+
+
+        <span>
+          {{ prod.nom }}
+        </span>
+
+
+
+        <button
+          class="delete"
+          (click)="eliminar(prod.id)">
+
+          ×
+
+        </button>
+
+
+      </div>
+
+    }
+
+
+    @if (pend().length === 0) {
+
+      <p class="vacio">
+        No hay productos pendientes
+      </p>
+
+    }
+
+
+  </section>
+
+
+
+
+
+  <!-- PRODUCTOS COMPRADOS -->
+
+  @if (comprados().length > 0) {
+
+    <section class="group">
+
+
+      <div class="title">
+
+        <h2>
+          Comprados
+        </h2>
+
+
+        <span>
+          {{ comprados().length }} items
+        </span>
+
+
+      </div>
+
+
+
+      @for (prod of comprados(); track prod.id) {
+
+
+        <div class="product done">
+
+
+          <button
+            class="check"
+            (click)="cambiar(prod.id)">
+
+            ☑
+
+          </button>
+
+
+          <span>
+            {{ prod.nom }}
+          </span>
+
+
+
+          <button
+            class="delete"
+            (click)="eliminar(prod.id)">
+
+            ×
+
+          </button>
+
+
+
+        </div>
+
+
+      }
+
+
+    </section>
+
+  }
+
+
+</div>

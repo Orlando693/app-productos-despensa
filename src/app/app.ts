@@ -1,4 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { Listas } from './pages/listas/listas';
+import { NuevaLista } from './pages/nueva-lista/nueva-lista';
+import { DetalleLista } from './pages/detalle-lista/detalle-lista';
 
 interface Prod {
   id: number;
@@ -9,82 +12,29 @@ interface Prod {
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [
+    Listas,
+    NuevaLista,
+    DetalleLista
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class AppComponent {
 
-  private clave = 'productos';
+  vista = 'listas';
 
-  prods = signal<Prod[]>(this.cargar());
-
-  pend = computed(() =>
-    this.prods().filter(p => !p.comp)
-  );
-
-  comprados = computed(() =>
-    this.prods().filter(p => p.comp)
-  );
-
-  agregar(inp: HTMLInputElement) {
-    const nom = inp.value.trim();
-
-    if (!nom) return;
-
-    this.prods.update(lista => [
-      ...lista,
-      {
-        id: Date.now(),
-        nom,
-        comp: false
-      }
-    ]);
-
-    inp.value = '';
-
-    this.guardar();
+  cambiarVista(nombre:string){
+    this.vista = nombre;
   }
+  crearLista(lista: {
+  nombre:string;
+  descripcion:string;
+}){
 
-  cambiar(id: number) {
-    this.prods.update(lista =>
-      lista.map(p =>
-        p.id === id
-          ? { ...p, comp: !p.comp }
-          : p
-      )
-    );
+  console.log('Nueva lista:', lista);
 
-    this.guardar();
-  }
+  this.cambiarVista('detalle');
 
-  eliminar(id: number) {
-    this.prods.update(lista =>
-      lista.filter(p => p.id !== id)
-    );
-
-    this.guardar();
-  }
-
-  limpiar() {
-    this.prods.update(lista =>
-      lista.filter(p => !p.comp)
-    );
-
-    this.guardar();
-  }
-
-  private cargar(): Prod[] {
-    const datos = localStorage.getItem(this.clave);
-
-    return datos
-      ? JSON.parse(datos)
-      : [];
-  }
-
-  private guardar() {
-    localStorage.setItem(
-      this.clave,
-      JSON.stringify(this.prods())
-    );
-  }
+}
 }

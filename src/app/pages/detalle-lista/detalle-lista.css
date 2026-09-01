@@ -1,0 +1,150 @@
+.container {
+
+  padding:24px;
+
+}
+
+
+
+.top {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:16px;
+
+  margin-bottom:32px;
+
+}
+
+
+h1 {
+
+  margin:0;
+
+  font-size:32px;
+
+}
+
+
+
+.menu {
+
+  border:none;
+
+  background:none;
+
+  font-size:24px;
+
+}
+
+
+
+.add-section {
+
+  display:flex;
+
+  gap:8px;
+
+  margin-bottom:32px;
+
+}
+
+
+
+.add-section input {
+
+  flex:1;
+
+  padding:16px;
+
+  border-radius:8px;
+
+  border:1px solid #ccc;
+
+}
+
+
+
+.add {
+
+  width:50px;
+
+  border:none;
+
+  border-radius:8px;
+
+  background:#111;
+
+  color:white;
+
+}
+
+
+
+.group {
+
+  margin-bottom:32px;
+
+}
+
+
+
+.title {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  margin-bottom:16px;
+
+}
+
+
+
+.title span {
+
+  color:#777;
+
+}
+
+
+
+.product {
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:16px;
+
+  margin-bottom:8px;
+
+  border-bottom:1px solid #ddd;
+
+}
+
+
+
+.product button {
+
+  border:none;
+
+  background:none;
+
+}
+
+
+
+.done {
+
+  color:#777;
+
+  text-decoration:line-through;
+
+}

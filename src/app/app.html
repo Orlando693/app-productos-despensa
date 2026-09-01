@@ -1,58 +1,17 @@
-<main class="cont">
-  <header>
-    <small>Despensa</small>
-    <h1>Que hace falta comprar?</h1>
-    <p>Anota lo que necesites comprar</p>
-  </header>
+@if(vista === 'listas'){
+  <app-listas 
+  (nuevaLista)="cambiarVista('nueva')">
+  </app-listas>
+  
+}
 
-  <section class="agr">
-    <input
-      #inp
-      placeholder="Leche, arroz, jabón..."
-      (keyup.enter)="agregar(inp)"
-    />
+@if(vista === 'nueva'){
+   <app-nueva-lista
+    (crear)="crearLista($event)"
+    (volver)="cambiarVista('listas')">
+  </app-nueva-lista>
+}
 
-    <button (click)="agregar(inp)">Agregar</button>
-  </section>
-
-  <section>
-    <h2>Por comprar ({{ pend().length }})</h2>
-
-    @if (pend().length === 0) {
-      <p class="vacio">No hay productos pendientes</p>
-    }
-
-    <ul>
-      @for (prod of pend(); track prod.id) {
-        <li>
-          <button class="ok" (click)="cambiar(prod.id)">✓</button>
-
-          <span>{{ prod.nom }}</span>
-
-          <button class="elim" (click)="eliminar(prod.id)">×</button>
-        </li>
-      }
-    </ul>
-  </section>
-
-  @if (comprados().length > 0) {
-    <section>
-      <div class="tit">
-        <h2>Comprados ({{ comprados().length }})</h2>
-        <button class="limp" (click)="limpiar()">Limpiar</button>
-      </div>
-
-      <ul>
-        @for (prod of comprados(); track prod.id) {
-          <li class="comprado">
-            <button class="ok marcado" (click)="cambiar(prod.id)">✓</button>
-
-            <span>{{ prod.nom }}</span>
-
-            <button class="elim" (click)="eliminar(prod.id)">×</button>
-          </li>
-        }
-      </ul>
-    </section>
-  }
-</main>
+@if(vista === 'detalle'){
+  <app-detalle-lista></app-detalle-lista>
+}

@@ -1,0 +1,77 @@
+.container {
+  padding: 24px;
+}
+
+
+header {
+  margin-bottom: 32px;
+}
+
+
+h1 {
+  margin-bottom: 8px;
+}
+
+
+p {
+  color: #666;
+}
+
+
+.form {
+
+  display:flex;
+  flex-direction:column;
+
+  gap:16px;
+
+}
+
+
+input,
+textarea {
+
+  padding:16px;
+
+  border-radius:8px;
+
+  border:1px solid #ccc;
+
+  font-size:16px;
+
+}
+
+
+textarea {
+
+  height:120px;
+
+}
+
+
+.crear {
+
+  margin-top:16px;
+
+  padding:16px;
+
+  background:#111;
+
+  color:white;
+
+  border:none;
+
+  border-radius:8px;
+
+}
+
+
+.cancelar {
+
+  padding:8px;
+
+  border:none;
+
+  background:white;
+
+}

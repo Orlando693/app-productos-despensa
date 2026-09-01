@@ -1,0 +1,60 @@
+<div class="container">
+
+  <header>
+    <h1>Nueva Lista</h1>
+
+    <p>
+      Crea una lista para organizar tus compras.
+    </p>
+  </header>
+
+
+  <section class="form">
+
+
+    <label>
+      Nombre
+    </label>
+
+
+    <input
+      [(ngModel)]="nombre"
+      placeholder="Ej: Compras del mes"
+    />
+
+
+
+    <label>
+      Descripción
+    </label>
+
+
+    <textarea
+      [(ngModel)]="descripcion"
+      placeholder="Detalles opcionales">
+    </textarea>
+
+
+
+    <button 
+      class="crear"
+      (click)="crearLista()">
+
+      Crear lista
+
+    </button>
+
+
+
+    <button
+      class="cancelar"
+      (click)="cancelar()">
+
+      Cancelar
+
+    </button>
+
+
+  </section>
+
+</div>

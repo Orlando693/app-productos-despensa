@@ -1,0 +1,84 @@
+.container {
+  padding: 24px;
+}
+
+
+.header {
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:32px;
+
+}
+
+
+h1 {
+
+  font-size:32px;
+  margin:0;
+
+}
+
+
+.primary-button {
+
+  padding:16px 24px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#111;
+  color:white;
+
+  cursor:pointer;
+
+}
+
+
+
+.lists-section h2 {
+
+  margin-bottom:16px;
+
+}
+
+
+
+.cards {
+
+  display:flex;
+  flex-direction:column;
+
+  gap:16px;
+
+}
+
+
+
+.list-card {
+
+  padding:24px;
+
+  border-radius:16px;
+
+  border:1px solid #ddd;
+
+}
+
+
+.list-card h3 {
+
+  margin-top:0;
+
+}
+
+
+.list-card span {
+
+  font-size:14px;
+
+  color:#666;
+
+}
