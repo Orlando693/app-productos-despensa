@@ -6,12 +6,16 @@
 }
 
 @if(vista === 'nueva'){
-   <app-nueva-lista
-    (crear)="crearLista($event)"
-    (volver)="cambiarVista('listas')">
-  </app-nueva-lista>
+  <app-nueva-lista
+  (crear)="crearLista($event)"
+  (volver)="cambiarVista('listas')">
+</app-nueva-lista>
 }
 
 @if(vista === 'detalle'){
-  <app-detalle-lista></app-detalle-lista>
+  <app-detalle-lista
+      (volver)="cambiarVista('listas')">
+
+</app-detalle-lista>
 }
+<app-navbar></app-navbar>

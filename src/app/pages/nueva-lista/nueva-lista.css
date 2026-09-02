@@ -75,3 +75,25 @@ textarea {
   background:white;
 
 }
+.top {
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+margin-bottom:32px;
+
+}
+
+
+.back {
+
+border:none;
+
+background:none;
+
+font-size:28px;
+
+}
