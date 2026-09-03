@@ -1,99 +1,59 @@
-.container {
-  padding: 24px;
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0 10px;
 }
-
-
-header {
-  margin-bottom: 32px;
-}
-
-
-h1 {
-  margin-bottom: 8px;
-}
-
-
-p {
-  color: #666;
-}
-
-
-.form {
-
-  display:flex;
-  flex-direction:column;
-
-  gap:16px;
-
-}
-
-
-input,
-textarea {
-
-  padding:16px;
-
-  border-radius:8px;
-
-  border:1px solid #ccc;
-
-  font-size:16px;
-
-}
-
-
-textarea {
-
-  height:120px;
-
-}
-
-
-.crear {
-
-  margin-top:16px;
-
-  padding:16px;
-
-  background:#111;
-
-  color:white;
-
-  border:none;
-
-  border-radius:8px;
-
-}
-
-
-.cancelar {
-
-  padding:8px;
-
-  border:none;
-
-  background:white;
-
-}
-.top {
-
-display:flex;
-
-align-items:center;
-
-gap:16px;
-
-margin-bottom:32px;
-
-}
-
 
 .back {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-text);
+  place-items: center;
+  touch-action: manipulation;
+}
 
-border:none;
+.back .material-symbols-rounded {
+  font-size: 1.5rem;
+}
 
-background:none;
+.back:active {
+  background: rgba(106, 63, 50, 0.1);
+}
 
-font-size:28px;
+.back:focus-visible {
+  outline: 2px solid var(--color-primary);
+}
 
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.intro {
+  max-width: 30ch;
+  margin: 0 0 26px 56px;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.form {
+  display: grid;
+  gap: 19px;
+  padding: 18px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--color-surface) 72%, transparent);
+}
+
+.form app-button {
+  margin-top: 3px;
 }

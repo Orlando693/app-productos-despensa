@@ -1,0 +1,30 @@
+<div class="field" [class.has-error]="error()">
+  @if (label()) {
+    <label class="field-label" [for]="inputId">{{ label() }}</label>
+  }
+
+  <div class="input-shell" [class.search]="type() === 'search'">
+    <input
+      class="field-input"
+      [id]="inputId"
+      [type]="type()"
+      [inputMode]="inputMode()"
+      [value]="value()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      [required]="required()"
+      [attr.aria-label]="label() || placeholder()"
+      [attr.aria-invalid]="error() ? 'true' : null"
+      [attr.aria-describedby]="error() ? inputId + '-error' : null"
+      (input)="updateValue($event)"
+      (blur)="blurred.emit()"
+    />
+    @if (type() === 'search') {
+      <span class="search-icon material-symbols-rounded" aria-hidden="true">search</span>
+    }
+  </div>
+
+  @if (error()) {
+    <p class="field-error" [id]="inputId + '-error'">{{ error() }}</p>
+  }
+</div>

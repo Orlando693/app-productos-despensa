@@ -1,21 +1,24 @@
-@if(vista === 'listas'){
-  <app-listas 
-  (nuevaLista)="cambiarVista('nueva')">
-  </app-listas>
-  
+@if (view === 'lists') {
+  <app-listas
+    [lists]="lists"
+    (newList)="showNewList()"
+    (listSelected)="openList($event)"
+  />
 }
 
-@if(vista === 'nueva'){
+@if (view === 'new-list') {
   <app-nueva-lista
-  (crear)="crearLista($event)"
-  (volver)="cambiarVista('listas')">
-</app-nueva-lista>
+    (create)="createList($event)"
+    (back)="backToLists()"
+  />
 }
 
-@if(vista === 'detalle'){
-  <app-detalle-lista
-      (volver)="cambiarVista('listas')">
-
-</app-detalle-lista>
+@if (view === 'list-detail') {
+  @if (selectedList; as list) {
+    <app-detalle-lista
+      [list]="list"
+      (itemsChange)="updateItems($event)"
+      (back)="backToLists()"
+    />
+  }
 }
-<app-navbar></app-navbar>

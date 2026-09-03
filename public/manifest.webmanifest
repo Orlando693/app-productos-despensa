@@ -1,8 +1,8 @@
 {
   "name": "Mi despensa",
   "short_name": "Despensa",
-  "theme_color": "#2f7d4a",
-  "background_color": "#f4f7f4",
+  "theme_color": "#fff3df",
+  "background_color": "#fff3df",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

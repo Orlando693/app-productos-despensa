@@ -1,60 +1,48 @@
-<div class="container">
-
-  <header class="header">
-    <h1>Shopping List</h1>
-
-        <button 
-            class="primary-button"
-            (click)="abrirNuevaLista()">
-
-            + Nueva lista
-            
-        </button>
+<main class="page">
+  <header class="page-header">
+    <p>Mis compras</p>
+    <h1>Listas</h1>
   </header>
 
+  <app-input
+    class="search-field"
+    type="search"
+    inputMode="search"
+    placeholder="Buscar listas"
+    [value]="search()"
+    (valueChange)="search.set($event)"
+  />
 
-  <section class="lists-section">
+  <app-button (clicked)="newList.emit()">
+    <span class="material-symbols-rounded" aria-hidden="true">add</span>
+    Nueva
+  </app-button>
 
-    <h2>Mis listas</h2>
-
-
-    <div class="cards">
-
-
-      <article class="list-card">
-
-        <h3>Supermercado</h3>
-
-        <p>
-          Compras semanales para la casa
-        </p>
-
-        <span>
-          8 productos
-        </span>
-
-      </article>
-
-
-
-      <article class="list-card">
-
-        <h3>Mercado</h3>
-
-        <p>
-          Frutas y verduras
-        </p>
-
-        <span>
-          5 productos
-        </span>
-
-      </article>
-
-
+  <section class="lists-panel" aria-labelledby="lists-title">
+    <div class="section-heading">
+      <p>Listas guardadas</p>
+      <h2 id="lists-title">Tus listas</h2>
     </div>
 
+    <div class="list-rows">
+      @for (list of filteredLists(); track list.id) {
+        <button
+          class="list-row"
+          type="button"
+          (click)="listSelected.emit(list.id)"
+        >
+          <span class="list-icon material-symbols-rounded" aria-hidden="true">shopping_basket</span>
+          <span class="list-copy">
+            <strong>{{ list.name }}</strong>
+            <span>{{ list.description || 'Sin descripción' }}</span>
+          </span>
+          <span class="list-arrow material-symbols-rounded" aria-hidden="true">chevron_right</span>
+        </button>
+      } @empty {
+        <p class="empty-state">
+          {{ search() ? 'No hay listas que coincidan.' : 'Todavía no creaste ninguna lista.' }}
+        </p>
+      }
+    </div>
   </section>
-
-
-</div>
+</main>

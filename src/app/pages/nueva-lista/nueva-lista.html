@@ -1,66 +1,31 @@
-<div class="container">
-
-  <header>
-    <button
-        class="back"
-        (click)="cancelar()">
-
-        ←
-</button>
+<main class="page">
+  <header class="top-bar">
+    <button class="back" type="button" aria-label="Volver a listas" (click)="back.emit()">
+      <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+    </button>
     <h1>Nueva Lista</h1>
-
-    <p>
-      Crea una lista para organizar tus compras.
-    </p>
   </header>
 
+  <p class="intro">Crea una lista para organizar lo que necesitas comprar.</p>
 
-  <section class="form">
-
-
-    <label>
-      Nombre
-    </label>
-
-
-    <input
-      [(ngModel)]="nombre"
-      placeholder="Ej: Compras del mes"
+  <form class="form" novalidate (submit)="$event.preventDefault(); createList()">
+    <app-input
+      label="Nombre"
+      placeholder="Ej. Supermercado"
+      [required]="true"
+      [value]="name"
+      [error]="nameError"
+      (valueChange)="updateName($event)"
+      (blurred)="nameTouched = true"
     />
 
+    <app-input
+      label="Descripción"
+      placeholder="Detalles opcionales"
+      [value]="description"
+      (valueChange)="description = $event"
+    />
 
-
-    <label>
-      Descripción
-    </label>
-
-
-    <textarea
-      [(ngModel)]="descripcion"
-      placeholder="Detalles opcionales">
-    </textarea>
-
-
-
-    <button 
-      class="crear"
-      (click)="crearLista()">
-
-      Crear lista
-
-    </button>
-
-
-
-    <button
-      class="cancelar"
-      (click)="cancelar()">
-
-      Cancelar
-
-    </button>
-
-
-  </section>
-
-</div>
+    <app-button type="submit" [disabled]="!name.trim()">Crear</app-button>
+  </form>
+</main>

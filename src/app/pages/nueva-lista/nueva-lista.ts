@@ -1,42 +1,36 @@
 import { Component, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Button } from '../../components/button/button';
+import { Input } from '../../components/input/input';
 
 @Component({
   selector: 'app-nueva-lista',
-  imports: [
-    FormsModule
-  ],
+  standalone: true,
+  imports: [Button, Input],
   templateUrl: './nueva-lista.html',
   styleUrl: './nueva-lista.css',
 })
 export class NuevaLista {
+  back = output<void>();
+  create = output<{ name: string; description: string }>();
 
-  volver = output<void>();
+  name = '';
+  description = '';
+  nameTouched = false;
 
-  crear = output<{
-    nombre: string;
-    descripcion: string;
-  }>();
-
-
-  nombre = '';
-  descripcion = '';
-
-
-  crearLista(){
-
-    this.crear.emit({
-      nombre: this.nombre,
-      descripcion: this.descripcion
-    });
-
+  get nameError(): string | null {
+    return this.nameTouched && !this.name.trim() ? 'El nombre es obligatorio.' : null;
   }
 
-
-  cancelar(){
-
-    this.volver.emit();
-
+  updateName(value: string): void {
+    this.name = value;
   }
 
+  createList(): void {
+    this.nameTouched = true;
+    if (!this.name.trim()) {
+      return;
+    }
+
+    this.create.emit({ name: this.name, description: this.description });
+  }
 }

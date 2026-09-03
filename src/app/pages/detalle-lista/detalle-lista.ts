@@ -1,166 +1,57 @@
-import { Component, computed, signal } from '@angular/core';
-
-interface Prod {
-  id: number;
-  nom: string;
-  comp: boolean;
-}
-
+import { Component, computed, input, output, signal } from '@angular/core';
+import { Input } from '../../components/input/input';
+import { ShoppingItem, ShoppingList } from '../../models';
 
 @Component({
   selector: 'app-detalle-lista',
-  imports: [],
+  standalone: true,
+  imports: [Input],
   templateUrl: './detalle-lista.html',
   styleUrl: './detalle-lista.css',
 })
 export class DetalleLista {
+  list = input.required<ShoppingList>();
 
+  itemsChange = output<ShoppingItem[]>();
+  back = output<void>();
 
-  private clave = 'productos';
+  search = signal('');
+  newItem = signal('');
 
+  pending = computed(() => this.filteredItems().filter((item) => !item.purchased));
+  purchased = computed(() => this.filteredItems().filter((item) => item.purchased));
 
-  prods = signal<Prod[]>(this.cargar());
+  addItem(): void {
+    const name = this.newItem().trim();
+    if (!name) {
+      return;
+    }
 
-
-  pend = computed(() =>
-    this.prods().filter(p => !p.comp)
-  );
-
-
-  comprados = computed(() =>
-    this.prods().filter(p => p.comp)
-  );
-
-
-
-  agregar(inp: HTMLInputElement){
-
-    const nom = inp.value.trim();
-
-
-    if(!nom) return;
-
-
-    this.prods.update(lista => [
-
-      ...lista,
-
-      {
-        id: Date.now(),
-        nom,
-        comp:false
-      }
-
+    this.itemsChange.emit([
+      ...this.list().items,
+      { id: Date.now(), name, purchased: false },
     ]);
-
-
-    inp.value='';
-
-    this.guardar();
-
+    this.newItem.set('');
   }
 
-
-
-
-  cambiar(id:number){
-
-    this.prods.update(lista =>
-
-      lista.map(p =>
-
-        p.id === id
-        ? {...p, comp:!p.comp}
-        : p
-
-      )
-
+  toggleItem(id: number): void {
+    this.itemsChange.emit(
+      this.list().items.map((item) =>
+        item.id === id ? { ...item, purchased: !item.purchased } : item,
+      ),
     );
-
-
-    this.guardar();
-
   }
 
-
-
-
-  eliminar(id:number){
-
-    this.prods.update(lista =>
-
-      lista.filter(p=>p.id!==id)
-
-    );
-
-
-    this.guardar();
-
+  deleteItem(id: number): void {
+    this.itemsChange.emit(this.list().items.filter((item) => item.id !== id));
   }
 
-
-
-
-  limpiar(){
-
-    this.prods.update(lista =>
-
-      lista.filter(p=>!p.comp)
-
-    );
-
-
-    this.guardar();
-
+  private filteredItems(): ShoppingItem[] {
+    const term = this.search().trim().toLocaleLowerCase('es');
+    return term
+      ? this.list().items.filter((item) =>
+          `${item.name} ${item.description ?? ''}`.toLocaleLowerCase('es').includes(term),
+        )
+      : this.list().items;
   }
-
-
-
-
-  private cargar():Prod[]{
-
-    const datos = localStorage.getItem(this.clave);
-
-
-    return datos
-      ? JSON.parse(datos)
-      : [
-
-        {
-          id:1,
-          nom:'Leche',
-          comp:false
-        },
-
-        {
-          id:2,
-          nom:'Pan',
-          comp:false
-        },
-
-        {
-          id:3,
-          nom:'Huevos',
-          comp:true
-        }
-
-      ];
-
-  }
-
-
-
-  private guardar(){
-
-    localStorage.setItem(
-
-      this.clave,
-
-      JSON.stringify(this.prods())
-
-    );
-
-  }
-
-
 }
