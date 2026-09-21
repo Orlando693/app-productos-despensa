@@ -1,166 +1,91 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, output, signal } from '@angular/core';
+import { BottomSheetComponent } from '../../components/bottom-sheet/bottom-sheet';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog';
+import { PageHeaderComponent } from '../../components/page-header/page-header';
+import { ProductRowComponent } from '../../components/product-row/product-row';
+import { SectionHeaderComponent } from '../../components/section-header/section-header';
+import { UiButtonComponent } from '../../components/ui-button/ui-button';
+import { UiInputComponent } from '../../components/ui-input/ui-input';
+import { DespensaStore } from '../../data/despensa.store';
+import { Product } from '../../models/despensa.models';
 
-interface Prod {
-  id: number;
-  nom: string;
-  comp: boolean;
-}
-
+type SheetMode = 'actions' | 'edit' | null;
 
 @Component({
   selector: 'app-detalle-lista',
-  imports: [],
+  standalone: true,
+  imports: [
+    BottomSheetComponent,
+    ConfirmDialogComponent,
+    PageHeaderComponent,
+    ProductRowComponent,
+    SectionHeaderComponent,
+    UiButtonComponent,
+    UiInputComponent,
+  ],
   templateUrl: './detalle-lista.html',
   styleUrl: './detalle-lista.css',
 })
 export class DetalleLista {
+  readonly store = inject(DespensaStore);
+  volver = output<void>();
 
+  readonly list = this.store.selectedList;
+  readonly pending = computed(() => this.list()?.products.filter(product => !product.purchased) ?? []);
+  readonly purchased = computed(() => this.list()?.products.filter(product => product.purchased) ?? []);
 
-  private clave = 'productos';
+  newProductName = '';
+  editName = '';
+  sheetMode = signal<SheetMode>(null);
+  selectedProduct = signal<Product | null>(null);
+  confirmDelete = signal(false);
 
-
-  prods = signal<Prod[]>(this.cargar());
-
-
-  pend = computed(() =>
-    this.prods().filter(p => !p.comp)
-  );
-
-
-  comprados = computed(() =>
-    this.prods().filter(p => p.comp)
-  );
-
-
-
-  agregar(inp: HTMLInputElement){
-
-    const nom = inp.value.trim();
-
-
-    if(!nom) return;
-
-
-    this.prods.update(lista => [
-
-      ...lista,
-
-      {
-        id: Date.now(),
-        nom,
-        comp:false
-      }
-
-    ]);
-
-
-    inp.value='';
-
-    this.guardar();
-
+  addProduct() {
+    const list = this.list();
+    if (!list || !this.newProductName.trim()) return;
+    this.store.addProduct(list.id, this.newProductName);
+    this.newProductName = '';
   }
 
-
-
-
-  cambiar(id:number){
-
-    this.prods.update(lista =>
-
-      lista.map(p =>
-
-        p.id === id
-        ? {...p, comp:!p.comp}
-        : p
-
-      )
-
-    );
-
-
-    this.guardar();
-
+  toggle(product: Product) {
+    const list = this.list();
+    if (list) this.store.toggleProduct(list.id, product.id);
   }
 
-
-
-
-  eliminar(id:number){
-
-    this.prods.update(lista =>
-
-      lista.filter(p=>p.id!==id)
-
-    );
-
-
-    this.guardar();
-
+  openActions(product: Product) {
+    this.selectedProduct.set(product);
+    this.sheetMode.set('actions');
   }
 
-
-
-
-  limpiar(){
-
-    this.prods.update(lista =>
-
-      lista.filter(p=>!p.comp)
-
-    );
-
-
-    this.guardar();
-
+  openEdit() {
+    const product = this.selectedProduct();
+    if (!product) return;
+    this.editName = product.name;
+    this.sheetMode.set('edit');
   }
 
-
-
-
-  private cargar():Prod[]{
-
-    const datos = localStorage.getItem(this.clave);
-
-
-    return datos
-      ? JSON.parse(datos)
-      : [
-
-        {
-          id:1,
-          nom:'Leche',
-          comp:false
-        },
-
-        {
-          id:2,
-          nom:'Pan',
-          comp:false
-        },
-
-        {
-          id:3,
-          nom:'Huevos',
-          comp:true
-        }
-
-      ];
-
+  saveEdit() {
+    const list = this.list();
+    const product = this.selectedProduct();
+    if (!list || !product || !this.editName.trim()) return;
+    this.store.updateProduct(list.id, product.id, this.editName);
+    this.closeSheet();
   }
 
-
-
-  private guardar(){
-
-    localStorage.setItem(
-
-      this.clave,
-
-      JSON.stringify(this.prods())
-
-    );
-
+  askDelete() {
+    this.sheetMode.set(null);
+    this.confirmDelete.set(true);
   }
 
+  deleteProduct() {
+    const list = this.list();
+    const product = this.selectedProduct();
+    if (list && product) this.store.deleteProduct(list.id, product.id);
+    this.confirmDelete.set(false);
+    this.selectedProduct.set(null);
+  }
 
+  closeSheet() {
+    this.sheetMode.set(null);
+  }
 }
