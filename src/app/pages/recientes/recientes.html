@@ -1,0 +1,55 @@
+<main class="page">
+  <app-page-header
+    title="Recientes"
+    subtitle="Productos que agregaste antes" />
+
+  <app-ui-input
+    placeholder="Buscar producto..."
+    [value]="search()"
+    (valueChange)="search.set($event)" />
+
+  <section class="recent-section">
+    <h2>Productos recientes</h2>
+    @for (name of filtered(); track name) {
+      <app-product-row
+        [name]="name"
+        state="selectable"
+        [selected]="selected().has(name)"
+        [showMenu]="false"
+        (toggle)="toggle(name)" />
+    } @empty {
+      <div class="empty">No hay productos recientes que coincidan con la búsqueda.</div>
+    }
+  </section>
+
+  <div class="sticky-action">
+    <app-ui-button
+      fullWidth
+      [disabled]="selected().size === 0"
+      (pressed)="openChooseList()">
+      @if (selected().size) { Agregar {{ selected().size }} a una lista } @else { Agregar a una lista }
+    </app-ui-button>
+  </div>
+</main>
+
+<app-bottom-sheet
+  [open]="chooseListOpen()"
+  title="Agregar a una lista"
+  (close)="chooseListOpen.set(false)">
+  <div class="destinations">
+    @for (list of store.lists(); track list.id) {
+      <button
+        class="destination"
+        type="button"
+        [class.destination--selected]="targetListId() === list.id"
+        (click)="targetListId.set(list.id)">
+        <span class="radio">{{ targetListId() === list.id ? '●' : '○' }}</span>
+        <span>
+          <strong>{{ list.name }}</strong>
+          <small>{{ list.products.length }} productos</small>
+        </span>
+      </button>
+    }
+  </div>
+  <app-ui-button fullWidth [disabled]="targetListId() === null" (pressed)="addToList()">Agregar productos</app-ui-button>
+</app-bottom-sheet>

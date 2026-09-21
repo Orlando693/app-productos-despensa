@@ -23,9 +23,15 @@
         (volver)="cambiarVista('detalle')"
         (finalizar)="cambiarVista('detalle')" />
     }
+
+    @if (vista === 'recientes') {
+      <app-recientes (abrirLista)="abrirLista($event)" />
+    }
   </div>
 
   @if (vista !== 'nueva' && vista !== 'compra') {
-    <app-bottom-nav active="listas" (navigate)="navegar($event)" />
+    <app-bottom-nav
+      [active]="vista === 'recientes' ? 'recientes' : 'listas'"
+      (navigate)="navegar($event)" />
   }
 </div>

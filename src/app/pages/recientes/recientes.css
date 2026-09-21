@@ -1,0 +1,65 @@
+.page {
+  min-height: 100dvh;
+  padding: 28px 24px 112px;
+}
+
+.recent-section {
+  margin-top: 30px;
+}
+
+h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.empty {
+  padding: 18px;
+  border: 1px dashed var(--color-border);
+  border-radius: 16px;
+  color: var(--color-text-secondary);
+}
+
+.sticky-action {
+  position: sticky;
+  bottom: 92px;
+  margin-top: 32px;
+  padding-top: 16px;
+  background: linear-gradient(transparent, var(--color-bg) 34%);
+}
+
+.destinations {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.destination {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  text-align: left;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.destination--selected {
+  border-color: var(--color-border);
+  background: rgb(201 171 131 / 16%);
+}
+
+.destination span:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.radio {
+  color: var(--color-primary);
+}
+
+small {
+  color: var(--color-text-secondary);
+}

@@ -37,6 +37,20 @@ export class DespensaStore {
   readonly selectedList = computed(() =>
     this._lists().find(list => list.id === this._selectedListId()) ?? null
   );
+  readonly recentProducts = computed(() => {
+    const seen = new Set<string>();
+    return this._lists()
+      .flatMap(list => list.products)
+      .slice()
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
+      .filter(product => {
+        const key = product.name.trim().toLocaleLowerCase();
+        if (!key || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .map(product => product.name);
+  });
 
   selectList(id: number) {
     this._selectedListId.set(id);
@@ -79,6 +93,26 @@ export class DespensaStore {
         ? { ...list, updatedAt: now, products: [...list.products, product] }
         : list
     ));
+    this.persist();
+  }
+
+  addProductsToList(listId: number, names: string[]) {
+    const cleanNames = names.map(name => name.trim()).filter(Boolean);
+    if (!cleanNames.length) return;
+
+    const now = new Date().toISOString();
+    this._lists.update(lists => lists.map(list => {
+      if (list.id !== listId) return list;
+
+      const products = cleanNames.map((name, index) => ({
+        id: Date.now() + index,
+        name,
+        purchased: false,
+        updatedAt: now,
+      }));
+
+      return { ...list, updatedAt: now, products: [...list.products, ...products] };
+    }));
     this.persist();
   }
 
