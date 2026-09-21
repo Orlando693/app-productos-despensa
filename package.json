@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "backend": "python backend/server.py"
   },
   "dependencies": {
     "@angular/common": "^20.0.0",

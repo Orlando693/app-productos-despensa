@@ -29,8 +29,8 @@ export class AppComponent {
     this.cambiarVista('detalle');
   }
 
-  crearLista(data: { nombre: string; descripcion: string }) {
-    const list = this.store.createList(data.nombre, data.descripcion);
+  async crearLista(data: { nombre: string; descripcion: string }) {
+    const list = await this.store.createList(data.nombre, data.descripcion);
     this.abrirLista(list.id);
   }
 
