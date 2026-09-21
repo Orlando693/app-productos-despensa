@@ -1,66 +1,28 @@
-<div class="container">
-
-  <header>
-    <button
-        class="back"
-        (click)="cancelar()">
-
-        ←
-</button>
-    <h1>Nueva Lista</h1>
-
-    <p>
-      Crea una lista para organizar tus compras.
-    </p>
-  </header>
-
+<main class="page">
+  <app-page-header
+    title="Nueva lista"
+    subtitle="Crea una lista para organizar tus compras."
+    [showBack]="true"
+    (back)="volver.emit()" />
 
   <section class="form">
+    <app-ui-input
+      label="Nombre"
+      placeholder="Ej. Compras del mes"
+      [value]="nombre"
+      [error]="error"
+      (valueChange)="nombre = $event; error = ''" />
 
+    <app-ui-input
+      label="Descripción"
+      placeholder="Detalles opcionales"
+      [value]="descripcion"
+      [multiline]="true"
+      (valueChange)="descripcion = $event" />
 
-    <label>
-      Nombre
-    </label>
-
-
-    <input
-      [(ngModel)]="nombre"
-      placeholder="Ej: Compras del mes"
-    />
-
-
-
-    <label>
-      Descripción
-    </label>
-
-
-    <textarea
-      [(ngModel)]="descripcion"
-      placeholder="Detalles opcionales">
-    </textarea>
-
-
-
-    <button 
-      class="crear"
-      (click)="crearLista()">
-
-      Crear lista
-
-    </button>
-
-
-
-    <button
-      class="cancelar"
-      (click)="cancelar()">
-
-      Cancelar
-
-    </button>
-
-
+    <div class="actions">
+      <app-ui-button fullWidth (pressed)="crearLista()">Crear lista</app-ui-button>
+      <app-ui-button variant="secondary" fullWidth (pressed)="volver.emit()">Cancelar</app-ui-button>
+    </div>
   </section>
-
-</div>
+</main>

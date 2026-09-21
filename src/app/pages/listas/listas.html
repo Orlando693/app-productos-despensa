@@ -1,60 +1,25 @@
-<div class="container">
+<main class="page">
+  <app-page-header
+    title="Mis listas"
+    subtitle="Organiza tus próximas compras" />
 
-  <header class="header">
-    <h1>Shopping List</h1>
-
-        <button 
-            class="primary-button"
-            (click)="abrirNuevaLista()">
-
-            + Nueva lista
-            
-        </button>
-  </header>
-
+  <app-ui-button fullWidth (pressed)="nuevaLista.emit()">+ Nueva lista</app-ui-button>
 
   <section class="lists-section">
-
-    <h2>Mis listas</h2>
-
-
+    <h2>Tus listas</h2>
     <div class="cards">
-
-
-      <article class="list-card">
-
-        <h3>Supermercado</h3>
-
-        <p>
-          Compras semanales para la casa
-        </p>
-
-        <span>
-          8 productos
-        </span>
-
-      </article>
-
-
-
-      <article class="list-card">
-
-        <h3>Mercado</h3>
-
-        <p>
-          Frutas y verduras
-        </p>
-
-        <span>
-          5 productos
-        </span>
-
-      </article>
-
-
+      @for (list of store.lists(); track list.id) {
+        <app-list-card
+          [title]="list.name"
+          [description]="list.description"
+          [pendingCount]="store.pendingCount(list)"
+          (open)="abrirLista.emit(list.id)" />
+      } @empty {
+        <div class="empty-state">
+          <strong>Aún no tienes listas.</strong>
+          <span>Crea una para empezar a registrar lo que hace falta.</span>
+        </div>
+      }
     </div>
-
   </section>
-
-
-</div>
+</main>
