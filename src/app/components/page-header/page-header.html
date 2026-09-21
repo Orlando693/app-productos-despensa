@@ -1,0 +1,20 @@
+<header class="page-header">
+  <div class="page-header__row">
+    @if (showBack()) {
+      <app-ui-button variant="icon" ariaLabel="Volver" (pressed)="back.emit()">←</app-ui-button>
+    }
+
+    <div class="page-header__titles">
+      <h1>{{ title() }}</h1>
+      @if (subtitle()) {
+        <p>{{ subtitle() }}</p>
+      }
+    </div>
+
+    @if (showMenu()) {
+      <app-ui-button variant="icon" ariaLabel="Más opciones" (pressed)="menu.emit()">•••</app-ui-button>
+    } @else if (showBack()) {
+      <span class="page-header__spacer" aria-hidden="true"></span>
+    }
+  </div>
+</header>

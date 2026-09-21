@@ -1,0 +1,20 @@
+.progress-summary {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.track {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--color-disabled);
+}
+
+.track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-primary);
+  transition: width 180ms ease;
+}

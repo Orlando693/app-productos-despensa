@@ -1,0 +1,10 @@
+<nav class="bottom-nav" aria-label="Navegación principal">
+  <button type="button" [class.active]="active() === 'listas'" (click)="navigate.emit('listas')">
+    <span class="icon">▣</span>
+    <span>Listas</span>
+  </button>
+  <button type="button" [class.active]="active() === 'recientes'" (click)="navigate.emit('recientes')">
+    <span class="icon">◷</span>
+    <span>Recientes</span>
+  </button>
+</nav>

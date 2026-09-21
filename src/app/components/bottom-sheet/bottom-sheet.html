@@ -1,0 +1,11 @@
+@if (open()) {
+  <div class="overlay" (click)="close.emit()">
+    <section class="sheet" role="dialog" aria-modal="true" [attr.aria-label]="title()" (click)="$event.stopPropagation()">
+      <span class="handle" aria-hidden="true"></span>
+      @if (title()) {
+        <h2>{{ title() }}</h2>
+      }
+      <ng-content />
+    </section>
+  </div>
+}

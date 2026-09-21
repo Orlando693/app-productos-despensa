@@ -1,0 +1,38 @@
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  z-index: 20;
+  width: min(calc(100% - 24px), 406px);
+  height: 68px;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: rgb(255 248 235 / 95%);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+
+button {
+  display: grid;
+  place-items: center;
+  gap: 2px;
+  border: 0;
+  border-radius: 15px;
+  color: var(--color-text-secondary);
+  background: transparent;
+  font-size: 12px;
+}
+
+button.active {
+  color: var(--color-text);
+  background: rgb(201 171 131 / 24%);
+  font-weight: 700;
+}
+
+.icon {
+  font-size: 18px;
+}

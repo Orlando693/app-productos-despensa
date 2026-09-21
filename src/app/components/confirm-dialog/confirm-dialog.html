@@ -1,0 +1,12 @@
+@if (open()) {
+  <div class="dialog-overlay">
+    <section class="dialog" role="alertdialog" aria-modal="true">
+      <h2>{{ title() }}</h2>
+      <p>{{ message() }}</p>
+      <div class="actions">
+        <app-ui-button variant="secondary" (pressed)="cancel.emit()">Cancelar</app-ui-button>
+        <app-ui-button variant="danger" (pressed)="confirm.emit()">{{ confirmLabel() }}</app-ui-button>
+      </div>
+    </section>
+  </div>
+}

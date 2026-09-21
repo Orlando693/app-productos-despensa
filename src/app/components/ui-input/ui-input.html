@@ -1,0 +1,26 @@
+<label class="field" [class.field--error]="!!error()" [class.field--disabled]="disabled()">
+  @if (label()) {
+    <span class="field__label">{{ label() }}</span>
+  }
+
+  @if (multiline()) {
+    <textarea
+      class="field__control field__control--area"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [disabled]="disabled()"
+      (input)="onInput($event)"></textarea>
+  } @else {
+    <input
+      class="field__control"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [disabled]="disabled()"
+      (input)="onInput($event)"
+      (keyup.enter)="enter.emit()" />
+  }
+
+  @if (error()) {
+    <span class="field__error">{{ error() }}</span>
+  }
+</label>

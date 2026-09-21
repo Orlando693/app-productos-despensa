@@ -1,0 +1,7 @@
+<button class="list-card" type="button" (click)="open.emit()">
+  <strong>{{ title() }}</strong>
+  @if (description()) {
+    <span class="description">{{ description() }}</span>
+  }
+  <span class="meta">{{ pendingCount() }} por comprar <span aria-hidden="true">›</span></span>
+</button>

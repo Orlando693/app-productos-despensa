@@ -1,0 +1,15 @@
+<div class="product-row" [class.product-row--purchased]="state() === 'purchased'">
+  <button class="product-row__main" type="button" (click)="toggle.emit()">
+    <span class="mark" aria-hidden="true">
+      @if (state() === 'purchased') { ● }
+      @else if (state() === 'selectable' && selected()) { ☑ }
+      @else if (state() === 'selectable') { □ }
+      @else { ○ }
+    </span>
+    <span>{{ name() }}</span>
+  </button>
+
+  @if (showMenu()) {
+    <button class="product-row__menu" type="button" aria-label="Acciones de {{ name() }}" (click)="menu.emit()">•••</button>
+  }
+</div>

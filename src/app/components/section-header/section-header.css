@@ -1,0 +1,16 @@
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+span {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}

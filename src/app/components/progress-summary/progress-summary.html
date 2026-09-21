@@ -1,0 +1,6 @@
+<div class="progress-summary">
+  <strong>{{ current() }} de {{ total() }} productos</strong>
+  <div class="track" role="progressbar" [attr.aria-valuenow]="current()" [attr.aria-valuemax]="total()">
+    <span [style.width.%]="percent()"></span>
+  </div>
+</div>
