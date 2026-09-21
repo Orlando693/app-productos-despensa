@@ -3,14 +3,15 @@ import { BottomNavComponent, MainTab } from './components/bottom-nav/bottom-nav'
 import { DespensaStore } from './data/despensa.store';
 import { DetalleLista } from './pages/detalle-lista/detalle-lista';
 import { Listas } from './pages/listas/listas';
+import { ModoCompra } from './pages/modo-compra/modo-compra';
 import { NuevaLista } from './pages/nueva-lista/nueva-lista';
 
-type View = 'listas' | 'nueva' | 'detalle';
+type View = 'listas' | 'nueva' | 'detalle' | 'compra';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [BottomNavComponent, DetalleLista, Listas, NuevaLista],
+  imports: [BottomNavComponent, DetalleLista, Listas, ModoCompra, NuevaLista],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

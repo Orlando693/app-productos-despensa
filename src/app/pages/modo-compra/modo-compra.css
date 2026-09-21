@@ -1,0 +1,24 @@
+.page {
+  min-height: 100dvh;
+  padding: 28px 24px 36px;
+}
+
+.product-section {
+  margin-top: 30px;
+}
+
+.done-message {
+  padding: 18px;
+  border: 1px dashed var(--color-border);
+  border-radius: 16px;
+  color: var(--color-text-secondary);
+  background: rgb(255 248 235 / 52%);
+}
+
+.finish-action {
+  position: sticky;
+  bottom: 20px;
+  margin-top: 34px;
+  padding-top: 12px;
+  background: linear-gradient(transparent, var(--color-bg) 32%);
+}

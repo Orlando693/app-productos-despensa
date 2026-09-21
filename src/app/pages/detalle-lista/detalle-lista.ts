@@ -29,6 +29,7 @@ type SheetMode = 'actions' | 'edit' | null;
 export class DetalleLista {
   readonly store = inject(DespensaStore);
   volver = output<void>();
+  empezarCompra = output<void>();
 
   readonly list = this.store.selectedList;
   readonly pending = computed(() => this.list()?.products.filter(product => !product.purchased) ?? []);

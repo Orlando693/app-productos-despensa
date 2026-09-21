@@ -13,11 +13,19 @@
     }
 
     @if (vista === 'detalle') {
-      <app-detalle-lista (volver)="cambiarVista('listas')" />
+      <app-detalle-lista
+        (volver)="cambiarVista('listas')"
+        (empezarCompra)="cambiarVista('compra')" />
+    }
+
+    @if (vista === 'compra') {
+      <app-modo-compra
+        (volver)="cambiarVista('detalle')"
+        (finalizar)="cambiarVista('detalle')" />
     }
   </div>
 
-  @if (vista !== 'nueva') {
+  @if (vista !== 'nueva' && vista !== 'compra') {
     <app-bottom-nav active="listas" (navigate)="navegar($event)" />
   }
 </div>

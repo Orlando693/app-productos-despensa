@@ -32,6 +32,10 @@
       </div>
     </section>
 
+    <div class="purchase-action">
+      <app-ui-button fullWidth [disabled]="!currentList.products.length" (pressed)="empezarCompra.emit()">Empezar compra</app-ui-button>
+    </div>
+
     @if (purchased().length) {
       <section class="product-section">
         <app-section-header title="Comprados" [count]="purchased().length" />

@@ -1,0 +1,41 @@
+<main class="page">
+  @if (list(); as currentList) {
+    <app-page-header
+      title="Comprando"
+      [subtitle]="currentList.name"
+      [showBack]="true"
+      (back)="volver.emit()" />
+
+    <app-progress-summary [current]="purchased().length" [total]="total()" />
+
+    <section class="product-section">
+      <app-section-header title="Pendientes" [count]="pending().length" />
+      @for (product of pending(); track product.id) {
+        <app-product-row
+          [name]="product.name"
+          state="pending"
+          [showMenu]="false"
+          (toggle)="toggle(product)" />
+      } @empty {
+        <div class="done-message">Ya marcaste todos los productos de la lista.</div>
+      }
+    </section>
+
+    @if (purchased().length) {
+      <section class="product-section">
+        <app-section-header title="Comprados" [count]="purchased().length" />
+        @for (product of purchased(); track product.id) {
+          <app-product-row
+            [name]="product.name"
+            state="purchased"
+            [showMenu]="false"
+            (toggle)="toggle(product)" />
+        }
+      </section>
+    }
+
+    <div class="finish-action">
+      <app-ui-button fullWidth (pressed)="finalizar.emit()">Finalizar compra</app-ui-button>
+    </div>
+  }
+</main>
