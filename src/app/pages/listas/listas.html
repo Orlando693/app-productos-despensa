@@ -3,7 +3,7 @@
     title="Mis listas"
     subtitle="Organiza tus próximas compras" />
 
-  <app-ui-button fullWidth (pressed)="nuevaLista.emit()">+ Nueva lista</app-ui-button>
+  <app-ui-button [fullWidth]="true" (pressed)="nuevaLista.emit()">+ Nueva lista</app-ui-button>
 
   <section class="lists-section">
     <h2>Tus listas</h2>

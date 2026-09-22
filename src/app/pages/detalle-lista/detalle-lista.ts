@@ -40,6 +40,9 @@ export class DetalleLista {
   sheetMode = signal<SheetMode>(null);
   selectedProduct = signal<Product | null>(null);
   confirmDelete = signal(false);
+  readonly deleteMessage = computed(() =>
+    `'${this.selectedProduct()?.name ?? 'Producto'}' se quitará de esta lista.`
+  );
 
   addProduct() {
     const list = this.list();

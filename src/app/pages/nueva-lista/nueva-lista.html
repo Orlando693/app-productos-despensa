@@ -21,8 +21,8 @@
       (valueChange)="descripcion = $event" />
 
     <div class="actions">
-      <app-ui-button fullWidth (pressed)="crearLista()">Crear lista</app-ui-button>
-      <app-ui-button variant="secondary" fullWidth (pressed)="volver.emit()">Cancelar</app-ui-button>
+      <app-ui-button [fullWidth]="true" (pressed)="crearLista()">Crear lista</app-ui-button>
+      <app-ui-button variant="secondary" [fullWidth]="true" (pressed)="volver.emit()">Cancelar</app-ui-button>
     </div>
   </section>
 </main>

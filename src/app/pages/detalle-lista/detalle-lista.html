@@ -33,7 +33,7 @@
     </section>
 
     <div class="purchase-action">
-      <app-ui-button fullWidth [disabled]="!currentList.products.length" (pressed)="empezarCompra.emit()">Empezar compra</app-ui-button>
+      <app-ui-button [fullWidth]="true" [disabled]="!currentList.products.length" (pressed)="empezarCompra.emit()">Empezar compra</app-ui-button>
     </div>
 
     @if (purchased().length) {
@@ -63,8 +63,8 @@
   [title]="selectedProduct()?.name ?? 'Producto'"
   (close)="closeSheet()">
   <div class="sheet-actions">
-    <app-ui-button variant="secondary" fullWidth (pressed)="openEdit()">Editar</app-ui-button>
-    <app-ui-button variant="danger" fullWidth (pressed)="askDelete()">Eliminar</app-ui-button>
+    <app-ui-button variant="secondary" [fullWidth]="true" (pressed)="openEdit()">Editar</app-ui-button>
+    <app-ui-button variant="danger" [fullWidth]="true" (pressed)="askDelete()">Eliminar</app-ui-button>
   </div>
 </app-bottom-sheet>
 
@@ -78,14 +78,14 @@
       [value]="editName"
       (valueChange)="editName = $event"
       (enter)="saveEdit()" />
-    <app-ui-button fullWidth (pressed)="saveEdit()">Guardar cambios</app-ui-button>
+    <app-ui-button [fullWidth]="true" (pressed)="saveEdit()">Guardar cambios</app-ui-button>
   </div>
 </app-bottom-sheet>
 
 <app-confirm-dialog
   [open]="confirmDelete()"
   title="¿Eliminar producto?"
-  [message]="'\'' + (selectedProduct()?.name ?? 'Producto') + '\'' se quitará de esta lista.'"
+  [message]="deleteMessage()"
   confirmLabel="Eliminar"
   (cancel)="confirmDelete.set(false)"
   (confirm)="deleteProduct()" />

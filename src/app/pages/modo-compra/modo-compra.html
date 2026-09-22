@@ -35,7 +35,7 @@
     }
 
     <div class="finish-action">
-      <app-ui-button fullWidth (pressed)="finalizar.emit()">Finalizar compra</app-ui-button>
+      <app-ui-button [fullWidth]="true" (pressed)="finalizar.emit()">Finalizar compra</app-ui-button>
     </div>
   }
 </main>

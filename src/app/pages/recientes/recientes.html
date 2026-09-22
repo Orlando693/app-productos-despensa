@@ -24,7 +24,7 @@
 
   <div class="sticky-action">
     <app-ui-button
-      fullWidth
+      [fullWidth]="true"
       [disabled]="selected().size === 0"
       (pressed)="openChooseList()">
       @if (selected().size) { Agregar {{ selected().size }} a una lista } @else { Agregar a una lista }
@@ -51,5 +51,5 @@
       </button>
     }
   </div>
-  <app-ui-button fullWidth [disabled]="targetListId() === null" (pressed)="addToList()">Agregar productos</app-ui-button>
+  <app-ui-button [fullWidth]="true" [disabled]="targetListId() === null" (pressed)="addToList()">Agregar productos</app-ui-button>
 </app-bottom-sheet>
